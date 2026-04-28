@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crosslist — GSD courses, translated for MIT</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-page:        #FAF7F0;
+    --bg-card:        #FFFFFF;
+    --bg-subtle:      #F4F0E6;
+    --bg-tag:         #EFEAE0;
+
+    --crimson:        #A41E22;
+    --mit-red:        #750014;
+    --sage:           #3F6B4E;
+    --ink:            #111111;
+    --mute:           #8A8A8A;
+
+    --crimson-tint:   rgba(164, 30, 34, 0.06);
+    --crimson-bg:     rgba(164, 30, 34, 0.10);
+    --sage-tint:      rgba(63, 107, 78, 0.07);
+    --sage-bg:        rgba(63, 107, 78, 0.13);
+
+    --border:         rgba(17, 17, 17, 0.14);
+    --border-soft:    rgba(17, 17, 17, 0.07);
+    --shadow-card:    0 1px 1px rgba(17,17,17,0.02), 0 6px 22px rgba(17,17,17,0.04);
+
+    --font-serif: Georgia, 'Times New Roman', 'Charter', serif;
+    --font-sans:  'Carlito', Calibri, 'Helvetica Neue', Arial, sans-serif;
+
+    --max-w: 1240px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-page);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input { font-family: inherit; }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  /* ================ HEADER ================ */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: saturate(1.4) blur(14px);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 16px clamp(20px, 3vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 14px; }
+  .brand-mark {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .brand-tag {
+    font-size: 11px;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+  }
+  .nav-right { display: flex; align-items: center; gap: 24px; }
+  .nav-link {
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: border-color 200ms;
+  }
+  .nav-link:hover { border-bottom-color: var(--crimson); }
+
+  /* ================ LAYOUT ================ */
+  main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 3vw, 40px);
+  }
+
+  /* ================ HERO ================ */
+  .hero {
+    padding: clamp(56px, 8vw, 100px) 0 clamp(36px, 5vw, 56px);
+    max-width: 980px;
+  }
+  .hero .eyebrow { margin-bottom: 26px; }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(38px, 5.4vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin-bottom: 26px;
+  }
+  h1 em { font-style: italic; font-weight: 400; color: var(--crimson); }
+
+  .lede {
+    font-size: clamp(17px, 1.55vw, 19px);
+    color: var(--ink);
+    max-width: 700px;
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+
+  /* ================ SKILL INPUT PANELS ================ */
+  .skill-block {
+    margin-top: clamp(40px, 5vw, 56px);
+    padding: clamp(28px, 3.4vw, 40px) clamp(24px, 3vw, 36px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    border-left: 4px solid var(--crimson);
+  }
+  .skill-block + .skill-block {
+    margin-top: 14px;
+    border-left-color: var(--sage);
+  }
+  .skill-label {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .skill-label .num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--crimson);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .skill-block + .skill-block .num { color: var(--sage); }
+  .skill-label .question {
+    font-family: var(--font-serif);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .skill-label .question em { font-style: italic; }
+  .skill-label .helper {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--mute);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    padding: 7px 13px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: all 180ms ease;
+    line-height: 1.3;
+  }
+  .chip:hover { border-color: var(--ink); }
+  .chip.active.hard {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .chip.active.soft {
+    background: var(--sage);
+    color: white;
+    border-color: var(--sage);
+  }
+  .clear-btn {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--crimson);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    visibility: hidden;
+  }
+  .clear-btn.show { visibility: visible; }
+
+  /* ================ STATS STRIP ================ */
+  .stats-strip {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 16px 0;
+    margin: clamp(36px, 4vw, 48px) 0 0;
+    font-size: 14px;
+    color: var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    align-items: baseline;
+    line-height: 1.5;
+  }
+  .stats-strip .num-red { color: var(--crimson); font-weight: 700; }
+  .stats-strip .num-sage { color: var(--sage); font-weight: 700; }
+  .stats-strip .num-ink { color: var(--ink); font-weight: 700; }
+  .stats-strip .sep { color: var(--mute); margin: 0 4px; }
+  .stats-strip strong { color: var(--ink); font-weight: 700; }
+
+  /* ================ RESULTS HEADER ================ */
+  .results-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 28px 0 14px;
+    margin-top: 26px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 400;
+    letter-spacing: -0.008em;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--crimson); }
+  .results-count {
+    font-size: 11.5px;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+  }
+
+  /* ================ COURSE CARDS ================ */
+  .courses { padding-bottom: 24px; }
+
+  .course {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    margin-top: 14px;
+    transition: border-color 240ms ease, box-shadow 240ms ease;
+    overflow: hidden;
+  }
+  .course:hover {
+    border-color: var(--border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .course-head {
+    padding: 26px clamp(22px, 3vw, 34px);
+  }
+
+  .course-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 18px;
+  }
+
+  .match-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 5px 11px 5px 8px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .match-badge.strong { background: var(--sage-bg); color: var(--sage); }
+  .match-badge.good   { background: var(--sage-tint); color: var(--sage); }
+  .match-badge.partial{ background: var(--bg-tag); color: var(--ink); }
+  .match-badge.stretch{ background: var(--crimson-tint); color: var(--crimson); }
+  .match-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .course-meta {
+    font-size: 11.5px;
+    color: var(--mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .course-meta .code { color: var(--crimson); }
+
+  .course-title {
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 2.1vw, 28px);
+    font-weight: 400;
+    letter-spacing: -0.008em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .course-side {
+    text-align: right;
+    flex: 0 0 auto;
+    min-width: 120px;
+  }
+  .retention-num {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .retention-num.good { color: var(--sage); }
+  .retention-num.warn { color: var(--crimson); }
+  .retention-num.mute { color: var(--mute); }
+  .retention-label {
+    font-size: 10.5px;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 6px;
+    font-weight: 700;
+  }
+
+  /* TRANSLATION DUAL-VIEW (always visible, no toggle) */
+  .translation {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .blurb {
+    padding: 16px 18px;
+    border-radius: 4px;
+    border-left: 3px solid;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .blurb h5 {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .blurb.original {
+    background: var(--crimson-tint);
+    border-left-color: var(--crimson);
+    color: var(--ink);
+  }
+  .blurb.original h5 { color: var(--crimson); }
+  .blurb.original p { font-style: italic; color: var(--ink); opacity: 0.85; }
+  .blurb.translated {
+    background: var(--sage-tint);
+    border-left-color: var(--sage);
+  }
+  .blurb.translated h5 { color: var(--sage); }
+  .blurb.translated p { color: var(--ink); }
+
+  .course-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    background: var(--bg-tag);
+    color: var(--ink);
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tag.good { background: var(--sage-bg); color: var(--sage); }
+  .tag.warn { background: var(--crimson-bg); color: var(--crimson); }
+  .tag.skill {
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .tag.skill.matched {
+    background: var(--ink);
+    color: white;
+  }
+
+  /* Expand button */
+  .expand-btn {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--mute);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 0;
+    transition: color 200ms;
+  }
+  .expand-btn:hover { color: var(--ink); }
+  .expand-btn .chev {
+    transition: transform 280ms cubic-bezier(0.2,0.7,0.2,1);
+  }
+  .course.open .expand-btn .chev { transform: rotate(180deg); }
+  .course.open .expand-btn { color: var(--ink); }
+
+  /* Expanded detail */
+  .course-detail {
+    display: none;
+    padding: 24px clamp(22px, 3vw, 34px) 30px;
+    border-top: 1px solid var(--border-soft);
+    background: var(--bg-subtle);
+  }
+  .course.open .course-detail { display: block; }
+  .course.open { box-shadow: var(--shadow-card); border-color: var(--border); }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px 28px;
+    margin-bottom: 22px;
+  }
+  .detail-grid dt {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mute);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .detail-grid dd {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .gain-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .gain-pills .lbl {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mute);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .gain-pill {
+    background: var(--sage-bg);
+    color: var(--sage);
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ================ SECTION BLOCKS ================ */
+  section.block {
+    margin-top: clamp(80px, 10vw, 130px);
+    scroll-margin-top: 80px;
+  }
+  section.block .eyebrow { margin-bottom: 18px; }
+  section.block h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    line-height: 1.06;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  section.block h2 em { font-style: italic; color: var(--crimson); }
+  section.block .sec-lede {
+    font-size: 17px;
+    color: var(--ink);
+    max-width: 640px;
+    margin-bottom: 40px;
+    line-height: 1.55;
+  }
+
+  .orient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .orient-card {
+    background: var(--bg-card);
+    padding: 30px clamp(28px, 3vw, 36px);
+    position: relative;
+  }
+  .orient-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 32px;
+    bottom: 32px;
+    width: 3px;
+    background: var(--crimson);
+  }
+  .orient-card .num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--crimson);
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .orient-card h3 {
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  .orient-card p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Footer */
+  footer {
+    margin-top: clamp(80px, 10vw, 130px);
+    padding: 32px 0 56px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer-left {
+    font-size: 13px;
+    color: var(--mute);
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  .footer-left strong { color: var(--ink); font-weight: 700; }
+  .footer-left em { color: var(--crimson); font-style: italic; }
+  .footer-right {
+    font-size: 11.5px;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+    line-height: 1.7;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--mute);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  /* ================ RESPONSIVE ================ */
+  @media (max-width: 760px) {
+    .nav-link { display: none; }
+    .nav-right { gap: 12px; }
+    .skill-label { flex-wrap: wrap; }
+    .skill-label .helper { margin-left: 0; flex-basis: 100%; margin-top: 4px; }
+    .course-top { grid-template-columns: 1fr; }
+    .course-side {
+      text-align: left;
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+    }
+    .translation { grid-template-columns: 1fr; gap: 10px; }
+    .stats-strip { gap: 6px 16px; font-size: 13.5px; }
+  }
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <span class="brand-mark">Crosslist</span>
+        <span class="brand-tag">GSD ↔ MIT · prototype</span>
+      </div>
+      <div class="nav-right">
+        <a href="#orient" class="nav-link">How GSD works</a>
+        <a href="#about" class="nav-link">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Solution 01 · Readable Door</div>
+      <h1>GSD course descriptions are written in a language <em>you didn't learn at MIT.</em></h1>
+      <p class="lede">Tell us what you already know — programming, fabrication, materials, thermo. We'll surface the GSD courses where your skills carry over, and translate the descriptions into language you can actually parse.</p>
+
+      <!-- HARD SKILLS -->
+      <div class="skill-block">
+        <div class="skill-label">
+          <span class="num">01</span>
+          <span class="question">What do you <em>already know?</em></span>
+          <button class="clear-btn" id="clear-hard">Clear</button>
+          <span class="helper" id="hard-helper">Multi-select · 0 picked</span>
+        </div>
+        <div class="chips" id="hard-chips">
+          <button class="chip" data-skill="programming">Python / programming</button>
+          <button class="chip" data-skill="grasshopper">Grasshopper / parametric</button>
+          <button class="chip" data-skill="cad">CAD (Rhino, Solidworks)</button>
+          <button class="chip" data-skill="3d-printing">3D printing</button>
+          <button class="chip" data-skill="cnc">CNC milling / lasercutting</button>
+          <button class="chip" data-skill="robotics">Robotics / Arduino</button>
+          <button class="chip" data-skill="mech-e">Mech-E / structures</button>
+          <button class="chip" data-skill="thermo">Thermo / fluids</button>
+          <button class="chip" data-skill="materials">Materials science</button>
+          <button class="chip" data-skill="graphics">Graphics / ML / CV</button>
+        </div>
+      </div>
+
+      <!-- SOFT SKILLS -->
+      <div class="skill-block">
+        <div class="skill-label">
+          <span class="num">02</span>
+          <span class="question">What design skills are you <em>here for?</em></span>
+          <button class="clear-btn" id="clear-soft">Clear</button>
+          <span class="helper">Optional</span>
+        </div>
+        <div class="chips" id="soft-chips">
+          <button class="chip" data-skill="design-judgment">Design judgment</button>
+          <button class="chip" data-skill="critical-theory">Critical theory / making</button>
+          <button class="chip" data-skill="material-inquiry">Material as inquiry</button>
+          <button class="chip" data-skill="spatial-reasoning">Spatial / cross-scale thinking</button>
+          <button class="chip" data-skill="critique-culture">Critique / verbal defense</button>
+          <button class="chip" data-skill="aesthetic-literacy">Aesthetic literacy</button>
+        </div>
+      </div>
+
+      <div class="stats-strip" role="region" aria-label="Catalog summary">
+        <div><span class="num-ink" id="stat-total">7</span> courses translated</div>
+        <span class="sep">·</span>
+        <div><span class="num-sage" id="stat-strong">0</span> strong matches</div>
+        <span class="sep">·</span>
+        <div>avg <span class="num-ink">11</span> hrs/wk</div>
+        <span class="sep">·</span>
+        <div>biggest gaps in coverage: <strong>Tangible/Sensors</strong>, <strong>AI/Computational</strong></div>
+      </div>
+    </section>
+
+    <div class="results-header">
+      <h2 class="section-title">Spring 2026 catalog — <em id="title-tail">browse all</em></h2>
+      <div class="results-count" id="results-count">7 / 7</div>
+    </div>
+
+    <section class="courses" id="course-list">
+      <!-- Cards generated by JS -->
+      <div class="empty" id="empty-state" hidden>No courses match. Try fewer filters.</div>
+    </section>
+
+    <!-- ORIENTATION -->
+    <section class="block" id="orient">
+      <div class="eyebrow">Onboarding · How GSD works</div>
+      <h2>Things MIT students consistently <em>get blindsided by.</em></h2>
+      <p class="sec-lede">Read this before week one. The deck's "MIT orientation session" condensed into four cards.</p>
+      <div class="orient-grid">
+        <div class="orient-card">
+          <div class="num">01</div>
+          <h3>Critique ≠ presentation</h3>
+          <p>You'll pin work on a wall and stand next to it while 3–6 faculty + outside critics talk about it for 15–25 minutes. They will interrupt you. They will disagree with each other. You don't need to "win" — you need to defend your reasoning. Silence is fine; bullshit is not.</p>
+        </div>
+        <div class="orient-card">
+          <div class="num">02</div>
+          <h3>"Studio" means a 4-hour block</h3>
+          <p>A studio meets twice a week for 3–4 hours, plus expected independent work — usually 12–20 hrs/week total. Closer to UROP intensity than to a problem-set class. Do not stack two studios.</p>
+        </div>
+        <div class="orient-card">
+          <div class="num">03</div>
+          <h3>Deliverables are physical</h3>
+          <p>Final review usually means: large-format prints (A1 minimum), a physical model (often built that week), and a digital file package. Plan model-shop time early — the queue gets brutal at finals.</p>
+        </div>
+        <div class="orient-card">
+          <div class="num">04</div>
+          <h3>Grading is qualitative</h3>
+          <p>Most studios grade Distinction / Pass / Low Pass / Fail. There are no point totals. Faculty assess: development across the semester, defensibility of decisions, quality of execution. Show your iterations — finished work alone reads as suspicious.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer id="about">
+      <div class="footer-left">
+        <strong>Crosslist</strong> is a working prototype for a GSD MDes proposal — the product instantiation of <em>Solution 01: Readable Door</em> in the broader <strong>Intangible Design</strong> project on rebalancing GSD ↔ MIT cross-registration. Course descriptions on the left of each card are drawn verbatim from the live GSD course catalog (gsd.harvard.edu/courses) and remain copyright Harvard University. Translations, match logic, and enrollment figures are illustrative.
+      </div>
+      <div class="footer-right">
+        Intangible Design<br>
+        Crosslist · v0.2<br>
+        Skill matcher
+      </div>
+    </footer>
+  </main>
+
+<script>
+// ============== COURSE DATA ==============
+// GSD descriptions quoted verbatim from gsd.harvard.edu/courses
+const COURSES = [
+  {
+    id: 'sci6338',
+    code: 'SCI 6338',
+    title: 'Introduction to Computational Design',
+    faculty: 'José Luis García del Castillo y López',
+    schedule: 'M/W · 4:45–6:00pm',
+    credits: 4,
+    retention: 94,
+    enrolledMit: 9,
+    enrolledGsd: 22,
+    gsd: 'An introductory course on Computational Design, with particular focus on architecture, landscape and urbanism. We will understand "Computational Design" as the set of methods borrowed from fields such as computer science, mathematics, and geometry, applied to solving design problems. The real craftsman is the one who understands their tools so well that they can change, improve, and adapt them to their own desires.',
+    mit: 'Half Grasshopper (visual node-based parametric modeling on top of Rhino), half Python scripting inside Rhino. You\'re learning to write small programs that generate geometry — closer to procedural / parametric / creative coding than to architectural design. Final project: one parametric system + technical writeup.',
+    hardHelpful: ['programming', 'grasshopper', 'cad', 'graphics'],
+    softGained: ['design-judgment', 'spatial-reasoning'],
+    tags: [
+      { txt: 'No prereq', kind: 'good' },
+      { txt: 'Cross-listed · 4.S480', kind: '' },
+      { txt: '12 hrs/wk', kind: '' }
+    ],
+    detail: {
+      'GSD original (2 sentences)': 'Methods borrowed from computer science, mathematics, and geometry, applied to solving design problems.',
+      'What you turn in': 'Weekly Grasshopper / Python exercises, midterm prototype, final parametric system + 5pp technical writeup.',
+      'Time commitment': '~12 hrs/wk including class. Heavier weeks 6–8.',
+      'Software': 'Rhino 8 + Grasshopper + Python. Free educational license.'
+    }
+  },
+  {
+    id: 'sci6230',
+    code: 'SCI 6230',
+    title: 'Material Systems: Digital Design and Fabrication',
+    faculty: 'Martin Bechthold (MaP+S)',
+    schedule: 'W · 1:30–4:30pm',
+    credits: 4,
+    retention: 88,
+    enrolledMit: 6,
+    enrolledGsd: 14,
+    gsd: 'Digital design and fabrication technologies have become integral to contemporary design and architectural practice discourse. The translation from design to realization is mediated by a range of tools and processes whose development is informed over time by material properties, skill, technology, and culture. Parallel technological developments relating to the way in which things are designed and the way things are made have afforded new opportunities related to the realization of new forms in architecture, part customization, and enhanced building performance.',
+    mit: 'Hands-on with the GSD Fab Lab: KUKA industrial robot arms, CNC mills, 3D printers, often with one annual material focus (recent years: ceramics). Small teams develop a research project ending in physical prototypes + a scholarly paper. Closer to a wet-lab seminar than a design studio. Useful if you\'ve done any CAM workflow at MIT.',
+    hardHelpful: ['cad', '3d-printing', 'cnc', 'robotics', 'mech-e', 'materials'],
+    softGained: ['material-inquiry', 'design-judgment', 'critique-culture'],
+    tags: [
+      { txt: 'No prereq', kind: 'good' },
+      { txt: 'Lab-heavy', kind: '' },
+      { txt: '14 hrs/wk', kind: 'warn' }
+    ],
+    detail: {
+      'What you turn in': 'Group research project: physical prototypes, custom-fabricated jigs/end-effectors, 12–15pp scholarly paper.',
+      'What "critique" means here': 'Three formal reviews + weekly desk crits. Final has outside reviewers from related industries.',
+      'Time commitment': '14 hrs/wk including studio time + shop access.',
+      'Watch out for': 'Group dynamics matter — pick teammates carefully. Bechthold is rigorous about the writing component.'
+    }
+  },
+  {
+    id: 'gsd6121',
+    code: 'GSD 6121',
+    title: 'Environmental Systems 1',
+    faculty: 'Holly Samuelson',
+    schedule: 'T/Th · 10:00–11:30am',
+    credits: 2,
+    retention: 96,
+    enrolledMit: 11,
+    enrolledGsd: 20,
+    gsd: 'The first of a two-module sequence in building technology and part of the core architecture curriculum. To study selected aspects of the physical environment which directly affect people and their buildings, such as climate, weather, solar radiation and heat gain and loss. To study the means by which environmental factors may be wisely utilized, controlled, and modified as an integral part of the architectural design.',
+    mit: 'Building thermodynamics, taught at engineering rigor. Heat transfer through envelopes, climate-driven energy modeling, solar gain calculations, occupant comfort metrics. Math-heavy and PSet-driven. The clearest fit in the GSD catalog if you\'ve done any thermo, fluids, or HVAC work — closer to 2.005 than to a design class.',
+    hardHelpful: ['thermo', 'mech-e', 'programming'],
+    softGained: ['cross-scale', 'design-judgment'],
+    tags: [
+      { txt: 'Math-heavy', kind: '' },
+      { txt: 'No portfolio', kind: 'good' },
+      { txt: '8 hrs/wk', kind: 'good' }
+    ],
+    detail: {
+      'What you turn in': 'PSets, two simulation assignments, midterm exam, final building energy model.',
+      'What "critique" means here': 'Lecture course. Final project gets a brief technical review, not a studio crit.',
+      'Time commitment': '8 hrs/wk. Predictable.',
+      'Tools': 'EnergyPlus, Climate Studio, Excel for hand calcs.'
+    }
+  },
+  {
+    id: 'sci6483',
+    code: 'SCI 6483',
+    title: 'Procedural Fields: Functional Design of Discrete Hyperdimensional Spaces',
+    faculty: 'José Luis García del Castillo y López',
+    schedule: 'M/W · 4:45–6:00pm',
+    credits: 4,
+    retention: 100,
+    enrolledMit: 4,
+    enrolledGsd: 8,
+    gsd: 'The second installment of a three-part course series on Computational Design. Building on foundations established in SCI-6338, this course advances toward the functional design of discrete hyperdimensional spaces, exploring procedural and field-based generative methods through which form, behavior, and information are negotiated as relational geometries.',
+    mit: 'Sequel to SCI 6338. Computational geometry, signed distance fields, voxel/lattice systems, procedural generation. Closer to MIT 6.838 (graphics) territory than to design. Strict prereq: comfortable with Grasshopper or Python before week 1. The title is a mouthful for what is essentially a graphics-and-geometry seminar.',
+    hardHelpful: ['programming', 'grasshopper', 'graphics', 'cad'],
+    softGained: ['spatial-reasoning'],
+    tags: [
+      { txt: 'Prereq: SCI 6338', kind: 'warn' },
+      { txt: 'Cross-listed · 4.S481', kind: '' },
+      { txt: '12 hrs/wk', kind: '' }
+    ],
+    detail: {
+      'Real prereq': 'Either SCI 6338 or proven proficiency with Grasshopper + Python. Auditing first 2 weeks is fine to confirm fit.',
+      'What you turn in': 'Five computational exercises, one term paper-and-project.',
+      'Time commitment': '12 hrs/wk.',
+      'Useful MIT background': '6.837/6.838 (graphics), 18.06 (linalg), any signal processing.'
+    }
+  },
+  {
+    id: 'des3464',
+    code: 'DES 3464',
+    title: 'Material Practice and its Agency',
+    faculty: 'TBA',
+    schedule: 'M · 1:30–4:30pm',
+    credits: 4,
+    retention: 71,
+    enrolledMit: 3,
+    enrolledGsd: 12,
+    gsd: 'This seminar introduces an understanding of material discourse in design and architecture that affects cultural, social, economic, and political issues. Materials carry a long history of human civilization and tradition. The seminar aims to embed material practice into the history and culture of its origins, resource utilization, craftsmanship, fabrication and its role in performance within building assembly and beyond to its atmospheric effect both as perceptual experience and thermodynamic performances.',
+    mit: 'A reading-and-writing seminar about materials, but mostly about how materials carry cultural meaning — concrete as colonial, wood as labor, glass as transparency-as-ideology. Each student picks one material to research all semester. Output: 12-page paper + presentation. No making, no shop time. Take it if you want to think about materials differently. The 29% MIT drop rate is from students expecting fabrication.',
+    hardHelpful: [],
+    softGained: ['critical-theory', 'material-inquiry', 'aesthetic-literacy'],
+    tags: [
+      { txt: 'No prereq', kind: 'good' },
+      { txt: 'No portfolio', kind: 'good' },
+      { txt: 'Heavy reading', kind: 'warn' }
+    ],
+    detail: {
+      'What you turn in': 'Weekly reading responses (300–500 words), midterm 5pp essay, final 12pp research paper + presentation.',
+      'What "critique" means here': 'Discussion-based seminar. Participation is 30% of grade.',
+      'Time commitment': '10–12 hrs/wk, mostly reading.',
+      'Watch out for': 'No making at all. If "material practice" makes you imagine the shop, this isn\'t that.'
+    }
+  },
+  {
+    id: 'des3344',
+    code: 'DES 3344',
+    title: 'Discourse Practices',
+    faculty: 'Edward Eigen',
+    schedule: 'Th · 9:00am–12:00pm',
+    credits: 4,
+    retention: 58,
+    enrolledMit: 2,
+    enrolledGsd: 9,
+    gsd: 'This course takes stock of the proliferating media and institutional frameworks within which architectural research takes form. We will understand these discursive modes — publications, exhibitions, installations, labs, collectives, pedagogies, policies, among others — as sites where architectural thought moves between the documentary and the propositional. We approach our topics on historical, theoretical, and practical terms.',
+    mit: 'How architecture\'s ideas circulate — through journals, museum shows, blogs, conferences, manifestos. You study specific examples (e.g. how Log magazine works, how MoMA curates architecture) and produce one piece of "discourse" yourself: an exhibition, a publication, a syllabus, a podcast. Think of it as media studies for the architecture profession. The 42% drop rate signals: don\'t take this if you\'re looking for a making class.',
+    hardHelpful: [],
+    softGained: ['critical-theory', 'aesthetic-literacy', 'critique-culture'],
+    tags: [
+      { txt: 'No prereq', kind: 'good' },
+      { txt: 'Heavy reading', kind: 'warn' },
+      { txt: 'Writing-intensive', kind: 'warn' }
+    ],
+    detail: {
+      'What you turn in': 'Weekly responses, midterm analytical essay, final discursive artifact (exhibit, publication, etc.) + statement.',
+      'What "critique" means here': 'Seminar discussion. Final project gets a 30-min review with outside critics.',
+      'Time commitment': '12+ hrs/wk, mostly reading and writing.',
+      'Watch out for': 'Eigen is exacting on writing quality. Drafts get heavy markup.'
+    }
+  },
+  {
+    id: 'sci6232',
+    code: 'SCI 6232',
+    title: 'Digital Production at Scale',
+    faculty: 'Jonathan Grinham',
+    schedule: 'T · 1:30–4:30pm',
+    credits: 4,
+    retention: 92,
+    enrolledMit: 5,
+    enrolledGsd: 11,
+    gsd: 'Digital design and fabrication technologies have become integral to contemporary design and architectural practice. The translation from design to realization is mediated by a range of tools and processes whose development is informed over time by material properties, skill, technology, and culture. Through lectures, hands-on workshops, and making-centric assignments, students will engage with a range of methods and materials that underpin a foundation in digital fabrication.',
+    mit: 'GSD Fab Lab intro through making. Each week is a different process: 3D printing, CNC milling, KUKA robot arms, lasercutting. Final project demonstrates one process at scale. Less theoretical than SCI 6230 (Material Systems), more like a fabrication survey course. Ideal if you\'ve used MakerWorks but haven\'t worked with industrial robots.',
+    hardHelpful: ['cad', '3d-printing', 'cnc', 'mech-e'],
+    softGained: ['material-inquiry', 'design-judgment'],
+    tags: [
+      { txt: 'No prereq', kind: 'good' },
+      { txt: 'Hands-on', kind: '' },
+      { txt: '12 hrs/wk', kind: '' }
+    ],
+    detail: {
+      'What you turn in': 'Weekly process exercises (one per fab method), final scaled prototype + documentation.',
+      'What "critique" means here': 'Mostly desk crits. Final has a public review with industry guests.',
+      'Time commitment': '12 hrs/wk including shop time.',
+      'Useful MIT background': 'Any time you\'ve spent in N51 or the MIT Hobby Shop carries over.'
+    }
+  }
+];
+
+// ============== STATE ==============
+const state = { hard: new Set(), soft: new Set() };
+
+// ============== MATCH LOGIC ==============
+function scoreCourse(course) {
+  const hardOverlap = course.hardHelpful.filter(s => state.hard.has(s));
+  const softOverlap = course.softGained.filter(s => state.soft.has(s));
+  return {
+    hardCount: hardOverlap.length,
+    softCount: softOverlap.length,
+    hardSkills: hardOverlap,
+    softSkills: softOverlap,
+    total: hardOverlap.length * 2 + softOverlap.length
+  };
+}
+
+function matchLabel(course, score) {
+  const hard = state.hard.size;
+  const soft = state.soft.size;
+  if (hard === 0 && soft === 0) return null;
+
+  // Soft-skill-only courses (theory/seminar)
+  if (course.hardHelpful.length === 0) {
+    if (score.softCount >= 2) return { kind: 'good', text: `Aligns with ${score.softCount} of your goals` };
+    if (score.softCount === 1) return { kind: 'partial', text: 'Aligns with 1 goal' };
+    if (hard > 0) return { kind: 'stretch', text: 'Outside your hard skills — soft-skill course' };
+    return null;
+  }
+
+  // Courses with hard prereqs
+  if (score.hardCount >= 3) return { kind: 'strong', text: `Strong fit — ${score.hardCount} skills carry over` };
+  if (score.hardCount === 2) return { kind: 'good', text: `Good fit — ${score.hardCount} skills carry over` };
+  if (score.hardCount === 1) return { kind: 'partial', text: '1 skill carries over' };
+  if (hard > 0) return { kind: 'stretch', text: 'No skills overlap — full stretch' };
+  return null;
+}
+
+// ============== RENDER ==============
+const SKILL_LABELS = {
+  'programming': 'Python',
+  'grasshopper': 'Grasshopper',
+  'cad': 'CAD',
+  '3d-printing': '3D printing',
+  'cnc': 'CNC',
+  'robotics': 'Robotics',
+  'mech-e': 'Mech-E',
+  'thermo': 'Thermo',
+  'materials': 'Materials',
+  'graphics': 'Graphics',
+  'design-judgment': 'Design judgment',
+  'critical-theory': 'Critical theory',
+  'material-inquiry': 'Material inquiry',
+  'spatial-reasoning': 'Spatial reasoning',
+  'critique-culture': 'Critique',
+  'aesthetic-literacy': 'Aesthetic literacy'
+};
+
+const list = document.getElementById('course-list');
+const empty = document.getElementById('empty-state');
+
+function render() {
+  // Score and sort
+  const scored = COURSES.map(c => ({ c, score: scoreCourse(c) }));
+  const anyFilter = state.hard.size + state.soft.size > 0;
+  if (anyFilter) {
+    scored.sort((a, b) => b.score.total - a.score.total);
+  }
+
+  // Clear
+  list.querySelectorAll('.course').forEach(el => el.remove());
+
+  let strongCount = 0;
+  scored.forEach(({ c, score }) => {
+    const match = matchLabel(c, score);
+    if (match && (match.kind === 'strong' || match.kind === 'good')) strongCount++;
+
+    const article = document.createElement('article');
+    article.className = 'course';
+
+    const retClass = c.retention >= 85 ? 'good' : c.retention >= 70 ? 'mute' : 'warn';
+
+    // Skill tags showing matched skills
+    const allSkills = [...c.hardHelpful, ...c.softGained];
+    const skillTagsHtml = allSkills.length ? allSkills.map(s => {
+      const matched = state.hard.has(s) || state.soft.has(s);
+      return `<span class="tag skill ${matched ? 'matched' : ''}">${SKILL_LABELS[s] || s}</span>`;
+    }).join('') : '';
+
+    article.innerHTML = `
+      <div class="course-head">
+        <div class="course-top">
+          <div>
+            ${match ? `<div class="match-badge ${match.kind}"><span class="dot"></span>${match.text}</div>` : ''}
+            <div class="course-meta">
+              <span class="code">${c.code}</span>
+              <span>${c.credits} cr</span>
+              <span>${c.schedule}</span>
+              <span>${c.faculty}</span>
+            </div>
+            <h3 class="course-title">${c.title}</h3>
+          </div>
+          <div class="course-side">
+            <div class="retention-num ${retClass}">${c.retention}%</div>
+            <div class="retention-label">MIT retention</div>
+          </div>
+        </div>
+
+        <div class="translation">
+          <div class="blurb original">
+            <h5>GSD Catalog</h5>
+            <p>${c.gsd}</p>
+          </div>
+          <div class="blurb translated">
+            <h5>What this means for you</h5>
+            <p>${c.mit}</p>
+          </div>
+        </div>
+
+        <div class="course-tags">
+          ${c.tags.map(t => `<span class="tag ${t.kind}">${t.txt}</span>`).join('')}
+          ${skillTagsHtml}
+        </div>
+
+        <button class="expand-btn" type="button" aria-expanded="false">
+          More detail
+          <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
+
+      <div class="course-detail">
+        <dl class="detail-grid">
+          ${Object.entries(c.detail).map(([k, v]) =>
+            `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}
+        </dl>
+        <div class="gain-pills">
+          <span class="lbl">Soft skills you'll build</span>
+          ${c.softGained.map(s => `<span class="gain-pill">${SKILL_LABELS[s] || s}</span>`).join('')}
+        </div>
+      </div>
+    `;
+
+    article.querySelector('.expand-btn').addEventListener('click', () => {
+      const open = article.classList.toggle('open');
+      article.querySelector('.expand-btn').setAttribute('aria-expanded', open);
+    });
+
+    list.insertBefore(article, empty);
+  });
+
+  // Update header
+  document.getElementById('stat-strong').textContent = anyFilter ? strongCount : 0;
+  document.getElementById('results-count').textContent = `${scored.length} / ${COURSES.length}`;
+  document.getElementById('title-tail').textContent = anyFilter ? 'sorted by your fit' : 'browse all';
+  empty.hidden = scored.length > 0;
+}
+
+// ============== CHIP HANDLERS ==============
+function setupChips(containerId, set, kind, helperId) {
+  const chips = document.querySelectorAll(`#${containerId} .chip`);
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const skill = chip.dataset.skill;
+      if (set.has(skill)) { set.delete(skill); chip.classList.remove('active', kind); }
+      else { set.add(skill); chip.classList.add('active', kind); }
+      if (helperId) {
+        const n = set.size;
+        document.getElementById(helperId).textContent = n === 0
+          ? 'Multi-select · 0 picked'
+          : `Multi-select · ${n} picked`;
+      }
+      const clearBtn = document.getElementById(kind === 'hard' ? 'clear-hard' : 'clear-soft');
+      clearBtn.classList.toggle('show', set.size > 0);
+      render();
+    });
+  });
+}
+setupChips('hard-chips', state.hard, 'hard', 'hard-helper');
+setupChips('soft-chips', state.soft, 'soft', null);
+
+document.getElementById('clear-hard').addEventListener('click', () => {
+  state.hard.clear();
+  document.querySelectorAll('#hard-chips .chip.active').forEach(c => c.classList.remove('active', 'hard'));
+  document.getElementById('hard-helper').textContent = 'Multi-select · 0 picked';
+  document.getElementById('clear-hard').classList.remove('show');
+  render();
+});
+document.getElementById('clear-soft').addEventListener('click', () => {
+  state.soft.clear();
+  document.querySelectorAll('#soft-chips .chip.active').forEach(c => c.classList.remove('active', 'soft'));
+  document.getElementById('clear-soft').classList.remove('show');
+  render();
+});
+
+// Initial render
+render();
+</script>
+</body>
+</html>
